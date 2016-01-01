@@ -28,6 +28,7 @@ class ProgLang(models.Model):
 
 class KnowledgeBase(models.Model):
     prog_lang = models.ForeignKey(ProgLang)
+    title = models.CharField(max_length=200)
     link = models.CharField(max_length=200)
     desc = models.TextField()
     active = models.BooleanField(default=True)
@@ -51,7 +52,7 @@ class KnowledgeBase(models.Model):
     # def __unicode__(self):
     #     return unicode_class(self)
     def __str__(self):
-        return self.desc
+        return self.title
     def to_dict(self):
         return convert_to_dict(self)
     
@@ -75,6 +76,7 @@ class SoftSkills(models.Model):
 
 class SoftSkillsData(models.Model):
     soft_skill = models.ForeignKey(SoftSkills)
+    title = models.CharField(max_length=200)
     link = models.CharField(max_length=200)
     desc = models.TextField()
     active = models.BooleanField(default=True)
@@ -98,7 +100,7 @@ class SoftSkillsData(models.Model):
     # def __unicode__(self):
     #     return unicode_class(self)
     def __str__(self):
-        return self.desc
+        return self.title
     def to_dict(self):
         return convert_to_dict(self)
     
