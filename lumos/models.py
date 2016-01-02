@@ -17,11 +17,11 @@ class ProgLang(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
+    def __unicode__(self):
+        return unicode_class(self)
+
     def to_dict(self):
         return convert_to_dict(self)
-    
-    def __str__(self):
-        return self.name
     
     class Meta:
         db_table = 'prog_lang'
@@ -49,10 +49,9 @@ class KnowledgeBase(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
-    # def __unicode__(self):
-    #     return unicode_class(self)
-    def __str__(self):
-        return self.title
+    def __unicode__(self):
+        return unicode_class(self)
+
     def to_dict(self):
         return convert_to_dict(self)
     
@@ -65,11 +64,11 @@ class SoftSkills(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
+    def __unicode__(self):
+        return unicode_class(self)
+
     def to_dict(self):
         return convert_to_dict(self)
-    
-    def __str__(self):
-        return self.name
     
     class Meta:
         db_table = 'soft_skills'
@@ -97,10 +96,9 @@ class SoftSkillsData(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
-    # def __unicode__(self):
-    #     return unicode_class(self)
-    def __str__(self):
-        return self.title
+    def __unicode__(self):
+        return unicode_class(self)
+
     def to_dict(self):
         return convert_to_dict(self)
     
@@ -131,10 +129,9 @@ class ProjectBase(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
-    # def __unicode__(self):
-    #     return unicode_class(self)
-    def __str__(self):
-        return self.title
+    def __unicode__(self):
+        return unicode_class(self)
+
     def to_dict(self):
         return convert_to_dict(self)
     

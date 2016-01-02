@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Knowledge Base</title>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+  <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+
+</head>
+<body>
+
+<div class="ui container segment">
+  <div class="ui styled accordion">
+
+    {% for lang in data %}
+      <div class="title prog_lang">
+        <h2>
+          <i class="dropdown icon"></i>
+          {{ lang.name }}
+        </h2>
+      </div>
+      <div class="content">
+      {% for row in lang.data %}
+      <div class="ui segments">
+      <a {% if row.link %} href="{{ row.link }}" target="_blank"  {% else %} href="#" {% endif %} style="color: inherit;" >
+        <div class="ui raised segment diff_lvl_{{ row.difficulty }} row_data">
+          <div class="ui header">
+            {{ row.title }}
+          </div><!-- header -->
+          {% if row.data_desc %}
+            <p>{{ row.data_desc }}</p>
+          {% endif %}
+        </div>
+      </a>
+      </div>
+      {% endfor %}
+      </div>
+    {% endfor %}
+  </div><!--accordian-->
+</div><!-- container -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.accordion')
+  .accordion({
+    selector: {
+      trigger: '.icon'
+    }
+  });
+
+  $('.diff_lvl_0').addClass("inverted green")
+  $('.diff_lvl_1').addClass("inverted yellow")
+  $('.diff_lvl_2').addClass("inverted orange")
+
+  $(".row_data").hover(function () {
+    $(this).toggleClass("inverted");
+ });
+
+
+});//document ready
+</script>
+</body>
+</html>
