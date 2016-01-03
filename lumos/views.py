@@ -26,9 +26,14 @@ def knowledge_base(request):
                 current_entry['diff_sort'] = entry.diff_sort
                 current_entry['media_type'] = entry.media_type
                 current_entry['data_desc'] = entry.desc
-                
+
                 current_lang['data'].append(current_entry)
+            
+            current_lang['data'] = sorted(current_lang['data'], key=lambda x: (int(x['difficulty']), int(x['diff_sort'])))
+
             return_data.append(current_lang)
     return render (request, 'knowledge_base.html', {'data' : return_data})
 
-
+def soft_skills_landing(request):
+    all_soft_skills = SoftSkills.objects.filter(active=1).values_list('name', flat=True).order_by('name')
+    return render(request, 'soft_skills_landing.html', {'all_soft_skills' : all_soft_skills})

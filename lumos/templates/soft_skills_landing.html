@@ -26,32 +26,21 @@
   <br/><br/><br/><br/><br/>
   <div class="ui one column center aligned stackable page grid">
   <div class="column ten wide">
-        
+    {% for skill in all_soft_skills %}
         <div class="ui horizontal divider">
             <p></p>
         </div>
         
-        <a href="/technical/knowledge-base">        
-        <div class="ui inverted red labeled button massive">
-            Knowlegde Base
+        <a href="/soft-skills/{{skill}}">        
+        <div class="ui inverted blue labeled button massive">
+            {{ skill }}
         </div>
         </a>
-        
         <div class="ui horizontal divider">
-        </div>
-        <br/>
-        
-        <div class="ui inverted red labeled button massive">
-            Project Base
+            <p></p>
         </div>
         
-        <div class="ui horizontal divider">
-        </div>
-        <br/>
-
-        <div class="ui inverted red labeled button massive">
-            Stuff you should know!
-        </div>
+    {% endfor %}
 </div>
 </div>        
 </div>
