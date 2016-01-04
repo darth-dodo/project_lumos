@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import ProgLang, KnowledgeBase, SoftSkills, SoftSkillsData
 # Create your views here.
 def hello(request):
-    return render(request, 'patience.html')
+    return render(request, 'home.html')
 
 def tech_landing(request):
     return render(request, 'tech_landing.html')
