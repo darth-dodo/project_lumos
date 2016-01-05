@@ -21,6 +21,9 @@ def knowledge_base(request):
             for entry in entries:
                 current_entry = {}
                 current_entry['title'] = entry.title
+                # for converting links into iframe
+                # current_entry['link'] = (entry.link).replace("watch?v=","embed/").replace("&list","?list")
+
                 current_entry['link'] = entry.link
                 current_entry['difficulty'] = entry.difficulty
                 current_entry['diff_sort'] = entry.diff_sort

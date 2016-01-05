@@ -9,7 +9,6 @@
   <title>Knowledge Base</title>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
-  <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
 <style type="text/css">
   .body{
@@ -42,7 +41,9 @@
 </style>
 </head>
 <body>
-<header></header>
+<header>
+</header>
+
 
 <div class="ui stackable menu">
   <div class="item">
@@ -79,8 +80,25 @@
         <div class="content">
         {% for row in lang.data %}
         <div class="ui segments">
-        <a {% if row.link %} href="{{ row.link }}" target="_blank"  {% else %} href="#" {% endif %} style="color: inherit;" >
-          <div class="ui raised segment diff_lvl_{{ row.difficulty }} row_data">
+
+        <a 
+          {% if row.link %} 
+            data-url="{{ row.link }}" 
+            data-media= "{{ row.media_type }}"  
+            href="{{ row.link }}"
+            target="_blank" 
+          {% else %} 
+            href="#" 
+          {% endif %} 
+          style="color: inherit;" 
+          >
+          <div class="ui raised segment diff_lvl_{{ row.difficulty }} row_data "
+                    {% if row.link %} 
+            data-url="{{ row.link }}" 
+            data-media= "{{ row.media_type }}"  
+          {% else %} 
+            href="#" 
+          {% endif %} >
             <div class="ui header">
               {{ row.title }}
             </div><!-- header -->
@@ -95,23 +113,31 @@
       {% endfor %}
     </div><!--accordian-->
   </div>
-  </div><!-- container -->
-</div><!-- main -->
-<!-- <footer>
-  <div class="ui inverted vertical footer segment">
-    <div class="ui center aligned container">
-    <p>Made with <i class="heart icon"></i>for DMCE</p>      
-    <div class="ui inverted section divider"></div>
-      <div class="ui horizontal inverted small divided link list">
-        <a class="item" href="#">Disclaimer</a>
-        <a class="item" href="#">About Us</a>
-        <a class="item" href="#">Feedback</a>
-        <a class="item" href="#">Privacy Policy</a>
+
+  <!-- modal -->
+
+<div class="ui modal" id="myModal">
+  <div class="header">
+        Video Source!
+  </div>
+  <div class="content">
+      <div class="ui header">
+      <p>Don't forget to practise what you learn!</p>
       </div>
+        <div class="ui segment center aligned">
+          <iframe id= "youtube-player" width="720" height="405" src="" frameborder="0"></iframe> 
+        </div>
+    </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      Close
     </div>
   </div>
-</footer>
- -->
+</div><!-- modal -->
+
+  </div><!-- container -->
+</div><!-- main -->
+
 <script type="text/javascript">
 $(document).ready(function(){
   $('.accordion')
@@ -128,9 +154,35 @@ $(document).ready(function(){
 
   $(".row_data").hover(function () {
     $(this).toggleClass("inverted");
- });
+});
 
+// // modal activator
+//   $(".row_data").click(function(){
+//     var url = $(this).data("url");
+//     console.log(this);
+//     console.log(url);    
+//     var media = $(this).data("media");
+//     console.log(media) ;
 
+//   $('#youtube-player').attr('src',url);
+
+//   $('#myModal').modal({
+//       closable  : false,
+//       onDeny    : function(){
+//         var r = confirm("Are you sure?");
+//         if (r == true) {
+//           txt = "You pressed OK!";
+//           console.log(txt)
+//           $('#youtube-player').attr('src','');
+//           $('#myModal').modal('close');      
+//         } else {
+//         return false;
+//       }
+//       }
+//     })
+//   $('#myModal').modal('show');
+// });//modal
+//modal commented as per discussion with ashwin
 });//document ready
 </script>
 </body>

@@ -3,8 +3,8 @@
 <head>
     <!-- Standard Meta -->
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"> -->
     <title>Project Lumos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -48,12 +48,13 @@
 </div>
 </div>
 
+<footer>
 <div class="ui inverted vertical footer segment">
     <div class="ui center aligned container">
     <p id='love'>Made with <i class="heart icon"></i>for DMCE</p>      
     <div class="ui inverted section divider"></div>
     <div class="ui horizontal inverted small divided link list">
-        <a class="item" href="#">Disclaimer</a>
+        <a href="#" id="disclaimer" class="item" style="color: inhert;">Disclaimer</a>
         <a class="item" href="#">About Us</a>
         <a class="item" href="#">Feedback</a>
         <a class="item" href="#">Privacy Policy</a>
@@ -61,6 +62,22 @@
     </div>
   </div>
 </footer>
+
+<!-- disclaimer modal -->
+<div class="ui modal" id="disclaimer-modal">
+  <div class="header">Header</div>
+  <div class="content">
+    <div class="ui center aligned segment">
+        Bacon ipsum dolor amet brisket andouille bresaola, pork chop nostrud elit non bacon leberkas aliqua et turkey dolore. Pork chop bresaola pork belly, shankle aute drumstick turducken venison sint labore t-bone magna ullamco ham hock. Kevin exercitation irure, ground round shankle cupidatat occaecat fatback ea fugiat id mollit. Landjaeger pork pariatur, ribeye short ribs biltong enim exercitation.
+
+Cillum non ball tip, proident capicola corned beef dolor short ribs aliqua pork chop irure in pariatur tempor ullamco. Meatball andouille qui pariatur jerky bacon. Commodo alcatra do, jerky tail reprehenderit exercitation adipisicing doner cillum sirloin. Minim tail occaecat sausage do, filet mignon anim spare ribs qui lorem corned beef fugiat aliqua. Occaecat pancetta prosciutto, turkey minim porchetta cow aliquip eu enim.
+
+Et ball tip consectetur brisket meatloaf non picanha sunt. Strip steak flank short ribs frankfurter, sed pariatur ullamco biltong officia spare ribs veniam velit chuck. Ex est culpa consequat aute eiusmod. Reprehenderit labore drumstick andouille short ribs, rump ut tenderloin eu biltong exercitation sausage.
+
+Does your lorem ipsum text long for something a little meatier? Give our generator a try… it’s tasty!
+    </div>
+</div>
+
 <script type="text/javascript">
 $(document).ready(function(){
 // .mouseover(function () {
@@ -76,6 +93,11 @@ $("#love").hover(function ()
     function () 
     {$(".heart").css({"color": "white"}); 
 });
+
+$("#disclaimer").click(function(){
+$('#disclaimer-modal').modal('show');
+})
+
 
 });//document ready
 </script>
