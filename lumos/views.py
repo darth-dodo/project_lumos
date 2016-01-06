@@ -8,6 +8,12 @@ def hello(request):
 def tech_landing(request):
     return render(request, 'tech_landing.html')
 
+def knowledge_base_landing(request):
+    all_prog_langs = ProgLang.objects.filter(active=1).order_by('id').values_list('name',flat=True)
+    print all_prog_langs
+    return render (request, 'knowledge_base_landing.html', {"all_prog_langs" : all_prog_langs})
+
+
 
 def knowledge_base(request):
     return_data = []
@@ -38,20 +44,23 @@ def knowledge_base(request):
             return_data.append(current_lang)
     return render (request, 'knowledge_base.html', {'data' : return_data})
 
-def knowledge_base_landing(request):
-    return_data = []
-    all_langs = ProgLang.objects.filter(active=1).order_by('name')
-    return render (request, 'knowledge_base_landing.html', {"return_data" : return_data})
 
-def knowledge_base_opt(request,lang):
+def knowledge_base_opti(request,lang):
     print lang
-    return_data = []
-    entries = KnowledgeBase.objects.filter(active=1,prog_lang=lang).order_by('diff_sort')
+    display_data = {}
+
+    entries = KnowledgeBase.objects.filter(active=1,prog_lang__name=lang).order_by('diff_sort')
+    display_data['name'] = lang
+
+    lang_desc = ProgLang.objects.filter(name=lang).values_list('desc',flat=True)
+    print lang_desc
+    if lang_desc:
+        display_data['desc'] = lang_desc[0]
+    else:
+        display_data['desc'] = None
+    print display_data
     if entries:
-        current_lang = {}
-        current_lang['name'] = lang.name
-        # current_lang['lang_desc'] = lang.desc
-        current_lang['data'] = []
+        display_data['data'] = []
         for entry in entries:
             current_entry = {}
             current_entry['title'] = entry.title
@@ -62,12 +71,10 @@ def knowledge_base_opt(request,lang):
             current_entry['diff_sort'] = entry.diff_sort
             current_entry['media_type'] = entry.media_type
             current_entry['data_desc'] = entry.desc
-            current_lang['data'].append(current_entry)
+            display_data['data'].append(current_entry)
 
-            current_lang['data'] = sorted(current_lang['data'], key=lambda x: (int(x['difficulty']), int(x['diff_sort'])))
-
-            return_data.append(current_lang)
-    return render(request, 'tech_data.html', {"display_data" : return_data})
+            display_data['data'] = sorted(display_data['data'], key=lambda x: (int(x['difficulty']), int(x['diff_sort'])))
+    return render(request, 'knowledge_base_opti.html', {"display_data" : display_data})
     
 
 def soft_skills_landing(request):
@@ -90,7 +97,11 @@ def soft_skill_data(request, skill):
     print skill
     display_data = {}
     display_data['name'] = skill
-    display_data['desc'] = SoftSkills.objects.filter(name=skill).values_list('desc',flat=True)
+    skill_desc = SoftSkills.objects.filter(name=skill).values_list('desc',flat=True)
+    if skill_desc:
+        display_data['desc'] = skill_desc[0]
+    else:
+        display_data['desc'] = None
     all_entries = SoftSkillsData.objects.filter(active=1,soft_skill__name=skill)
     display_data['data'] = []
     for entry in all_entries:

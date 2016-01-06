@@ -24,10 +24,10 @@
 <div class="ui middle aligned center aligned grid">
   <div class="ui stackable three column divided grid container">
     <div class="row">
-    {% for skill in all_soft_skills %}
+    {% for lang in all_prog_langs %}
       <div class="three wide column">
-        <a href="{{skill}}" style="color:inherit;">
-          <div class="ui segment skill">{{skill}}</div>
+        <a href="{{lang}}" style="color:inherit;">
+          <div class="ui segment skill">{{lang}}</div>
         </a>
       </div>
     {% if forloop.counter|divisibleby:3 %}
@@ -36,13 +36,14 @@
     {% endif %}
   {% endfor %}
    </div>
+  </div>
 </div>
-</div>
+
 <script type="text/javascript">
 $(document).ready(function(){
 $(".skill").hover(function () {
     // $(this).transition("bounce");
-    $(this).toggleClass("inverted yellow")
+    $(this).toggleClass("inverted red")
  });
 
 

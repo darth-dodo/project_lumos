@@ -10,7 +10,8 @@
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
-<style type="text/css">
+
+    <style type="text/css">
     body {
       background-color: #DADADA;
     }
@@ -20,21 +21,21 @@
     .snap-column {
       max-width: 450px;
     }
-</style>
+  </style>
 </head>
 <body>
 
 {% if display_data.data|length == 0 %}
 <br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<div class="ui center aligned grid snap-grid">
+<div class="ui middle aligned center aligned grid snap-grid">
   <div class="column snap-column">
     <h2 class="ui teal header">
         Oh Snap!
     </h2>
     <div class="ui large form">
-      <div class="ui stacked segment left aligned ">
+      <div class="ui stacked segment">
         <p>Seems like currently there is no data present for <b>{{display_data.name}}</b>!
-        Please visit later or provide requirements in the <b><a href="#">Feedback form</a></b>.</p>
+        Please visit later or provide requirements in the<br/><a href="#">Feedback form</a></p>
         <a href="/">
         <div class="ui fluid large teal submit button">Head back on to the home page?</div>
         </a>
@@ -46,11 +47,12 @@
 {%else%}
 
 
+
 <div class="ui stackable menu">
   <div class="item">
     <a href="/"><i class="large home icon"></i></a>
   </div>
-  <a class="item" href="/soft-skills/">Soft Skills</a>
+  <a class="item" href="/technical/">Technical Skills</a>
     <div class="ui simple dropdown item">
       Extra
       <i class="dropdown icon"></i>
@@ -64,9 +66,9 @@
 
 <div class="ui main">
   <div class="ui header segment">
-    <h1 class="ui header">Soft Skills</h1>
+    <h1 class="ui header">Knowledge Base</h1>
   </div>
-
+ 
 <div class="ui one column stackable page grid">
       <!-- negative space -->
       <div class="column two wide"></div>
@@ -76,7 +78,6 @@
                         {% if display_data.desc %}
                             <p>{{display_data.desc}}</p>
                         {% endif %}
-
                 {% for row in display_data.data %}
                 
                 <div class="ui raised segment diff_lvl_{{ row.difficulty }} row_data "> 
