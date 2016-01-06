@@ -21,9 +21,43 @@
   <a class="item">Sign-in</a>
 </div>
 
+<div class="ui main">
+  <div class="ui header segment">
+    <h1 class="ui header">Soft Skills</h1>
+  </div>
+
+<div class="ui one column stackable page grid">
+      <!-- negative space -->
+      <div class="column three wide"></div>
+            <div class="column ten wide">
+                <div class="ui segment">
+                    <h1 class="ui header"> {{display_data.name}} </h1>
+                        {% if display_data.desc %}
+                            <p>{{display_data.desc}}</p>
+                        {% endif %}
+
+                {% for row in display_data.data %}
+                <div class="ui raised segment diff_lvl_{{ row.difficulty }} row_data ">
+                    <h3 class="ui header ">
+                        {{ row.title }}
+                    </h3>
+                        {% if row.data_desc %}
+                          
+                          <p>{{ row.data_desc }}</p>
+                        {% endif %}
+                </div>
+                {% endfor %}
+         <!-- <div class="column ten wide"> -->
+         </div>
+        </div>
+    </div>
+</div>
+
+<br/><br/><br/><br/><br/><br/>
+
 <div class="ui center aligned">
 <div class="ui main middle aligned segment">
-    <div class="ui segment">
+<div class="ui segment">
     <h1 class="ui center aligned header"> {{display_data.name}} </h1>
     {% if display_data.desc %}
         <p>{{display_data.desc}}</p>
