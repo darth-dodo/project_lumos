@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import ProgLang, KnowledgeBase, SoftSkills, SoftSkillsData
+from .models import ProgLang, KnowledgeBase, SoftSkills, SoftSkillsData, UserFeedback
+from django.views.decorators.csrf import csrf_exempt
+import json
 # Create your views here.
 def hello(request):
     return render(request, 'home.html')
@@ -12,8 +14,6 @@ def knowledge_base_landing(request):
     all_prog_langs = ProgLang.objects.filter(active=1).order_by('id').values_list('name',flat=True)
     print all_prog_langs
     return render (request, 'knowledge_base_landing.html', {"all_prog_langs" : all_prog_langs})
-
-
 
 def knowledge_base(request):
     return_data = []
@@ -43,7 +43,6 @@ def knowledge_base(request):
 
             return_data.append(current_lang)
     return render (request, 'knowledge_base.html', {'data' : return_data})
-
 
 def knowledge_base_opti(request,lang):
     print lang
@@ -75,8 +74,7 @@ def knowledge_base_opti(request,lang):
 
             display_data['data'] = sorted(display_data['data'], key=lambda x: (int(x['difficulty']), int(x['diff_sort'])))
     return render(request, 'knowledge_base_opti.html', {"display_data" : display_data})
-    
-
+ 
 def soft_skills_landing(request):
     all_soft_skills = SoftSkills.objects.filter(active=1).values_list('name', flat=True)
     all_soft_skills = sorted([a.title() for a in all_soft_skills])
@@ -120,3 +118,18 @@ def soft_skill_data(request, skill):
 
     print display_data
     return render(request, 'soft_skills_data.html', {'display_data' : display_data})
+
+@csrf_exempt
+def feedback_form(request):
+    if request.method == 'POST' and request.is_ajax():
+        json_string = request.body.decode(encoding='UTF-8')
+        data = json.loads(json_string)
+        print data
+        username =  str(data['username'])
+        email = data['email']
+        feedback = str(data['feedback'])
+        print feedback
+        user_feedback = UserFeedback(username = username,email = email, feedback_note = feedback)
+        print user_feedback
+        user_feedback.save()
+    return HttpResponse(json.dumps(True))

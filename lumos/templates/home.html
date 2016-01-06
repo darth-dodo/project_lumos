@@ -10,7 +10,9 @@
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
-<style type="text/css">
+    <!-- not working :( -->
+    <!-- // <script type="text/javascript" src="/lumos/templates/js/feedback_form.js"></script> -->
+    <style type="text/css">
   .ui.footer.segment {
     /*margin: 5em 0em 0em;*/
     text-align: center;
@@ -53,13 +55,12 @@
 <footer>
 <div class="ui inverted vertical footer segment">
     <div class="ui center aligned container">
-    <p id='love'>Made with <i class="heart icon"></i>for DMCE</p>      
+    <!-- <p id='love'>Made with <i class="heart icon"></i>for DMCE</p>       -->
     <div class="ui inverted section divider"></div>
     <div class="ui horizontal inverted small divided link list">
         <a href="#" id="disclaimer" class="item" style="color: inhert;">Disclaimer</a>
         <a class="item" href="#">About Us</a>
-        <a class="item" href="#">Feedback</a>
-        <a class="item" href="#">Privacy Policy</a>
+        <a class="item" id="feedback" class="item" style="color: inhert;">Feedback</a>
       </div>
     </div>
   </div>
@@ -67,7 +68,7 @@
 
 <!-- disclaimer modal -->
 <div class="ui modal" id="disclaimer-modal">
-  <div class="header">Header</div>
+  <div class="header">Disclaimer</div>
   <div class="content">
     <div class="ui center aligned segment">
         Bacon ipsum dolor amet brisket andouille bresaola, pork chop nostrud elit non bacon leberkas aliqua et turkey dolore. Pork chop bresaola pork belly, shankle aute drumstick turducken venison sint labore t-bone magna ullamco ham hock. Kevin exercitation irure, ground round shankle cupidatat occaecat fatback ea fugiat id mollit. Landjaeger pork pariatur, ribeye short ribs biltong enim exercitation.
@@ -79,17 +80,112 @@ Et ball tip consectetur brisket meatloaf non picanha sunt. Strip steak flank sho
 Does your lorem ipsum text long for something a little meatier? Give our generator a try… it’s tasty!
     </div>
 </div>
+</div>
+
+<!-- feedback form modal -->
+<div class="ui inverted fullscreen modal" id="feedback-modal">
+  <div class="header"><h2 class="ui teal header center aligned">
+        You are awesome! ^__^
+    </h2></div>
+    <div class="content">
+    <div class="ui container">
+        <div class="column">
+            <div class="ui form" id="form">
+                <div class="ui fluid segment">
+                    <div class="field">
+                        <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input id="username" type="text" name="username" placeholder="Name">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="mail icon"></i>
+                            <input id="email" class="feedback-data" type="text" name="email" placeholder="E-mail address*">
+                        </div>
+                    </div>
+                    <div class="field">
+                    <i class="write icon"></i>
+                        <div class="ui left icon input">
+                            <textarea id="feedback" placeholder="Type in your feedback" class="feedback-data"></textarea>
+                            
+                        </div>
+                    </div><!-- textarea -->
+                   
+                   <div class="ui fluid large teal submit button" id="submit">Submit feedback!</div>
+                    </div>
+                </div>
+        </div>
+    </div><!-- container -->
+    </div><!-- content -->
+</div><!-- modal -->
+
+<!-- feedback form modal  -->
 
 <script type="text/javascript">
 $(document).ready(function(){
-// .mouseover(function () {
-//     // $(this).transition("bounce");
-//     $(this).css({"color": "red"});
-//  });
+$("#submit").click(function(){
+      var proceed = true;
+      $(".feedback-data").each(function(){
+        $(this).css('border-color','');
+        // console.log(this);
+        if(!$.trim($(this).val())){ //if this field is empty
+            $(this).css('border-color','red'); //change border color to red
+            
+            proceed = false; //set do not proceed flag
+            alert("Please provide appropriate data");
+            return false;
+        }
+        //check invalid email
+        var email_reg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        // console.log($(this).val());
+        if($(this).attr("name")=="email"
+           && !email_reg.test($.trim($(this).val())))
+        {
+            $(this).css('border-color','red'); //change border color to red
+            alert('Please provide valid email!');
+            proceed = false; //set do not proceed flag
+            return false;
+        }
+      });//finishing validations
+    console.log(proceed);
+    if (proceed){
+    var feedback_data = {}
+    username = $("#username").val();
+    console.log(username);
+    if (username)
+          {
+            feedback_data['username'] = username
+          }
+    else{
+        feedback_data['username'] = 'Anon'
+    } 
+    feedback_data['email'] = $("#email").val().trim()
+    feedback_data['feedback'] = $("textarea#feedback").val().trim()
+    console.log(feedback_data);
+    $.ajax({
+        type : 'POST',
+        url : '/feedback-form/',
+        data :JSON.stringify(feedback_data)
+        ,dataType : "json"
+        ,success : function(data){
+            alert("Thanks for providing feedback! :)");
+            window.location.reload();
+        }
+        ,error : function(data){
+            alert("Oh shucks! Feedback not saved! Please try again!");
+        }
+    });//ajax call
+  }
+});// submit fucntion
+
+
 $(".massive").hover(function () {
     // $(this).transition("bounce");
     $(this).toggleClass("inverted")
  });
+
 $("#love").hover(function () 
     {$(".heart").css({"color": "red"});}, 
     function () 
@@ -98,6 +194,10 @@ $("#love").hover(function ()
 
 $("#disclaimer").click(function(){
 $('#disclaimer-modal').modal('show');
+})
+
+$("#feedback").click(function(){
+$('#feedback-modal').modal('show');
 })
 
 

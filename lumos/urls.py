@@ -13,7 +13,5 @@ urlpatterns = [
 # other landing page options
    url(r'^soft-skills-col/$', views.soft_skills_landing_col),
    url(r'^soft-skills-but/$', views.soft_skills_landing_but),
-   
-   
-
+   url(r'^feedback-form/$', views.feedback_form),   
 ]

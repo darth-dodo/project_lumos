@@ -139,3 +139,20 @@ class ProjectBase(models.Model):
     
     class Meta:
         db_table = 'tech_project_base'
+
+class UserFeedback(models.Model):
+    username = models.CharField(max_length=200,null=True,default=None)
+    email = models.EmailField()
+    feedback_note = models.TextField(null=True,blank=True)
+    active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return unicode_class(self)
+
+    def to_dict(self):
+        return convert_to_dict(self)
+    
+    class Meta:
+        db_table = 'user_feedback'
