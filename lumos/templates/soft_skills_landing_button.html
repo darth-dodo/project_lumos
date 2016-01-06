@@ -28,7 +28,7 @@
 {% for skill in all_soft_skills %}
     <div class="three wide column">
     <a href="{{skill}}" style="color:inherit;">
-      <div class="ui segment skill">{{skill}}</div>
+      <div class="ui button big inverted orange skill">{{skill}}</div>
     </div>
     </a>
     {% if forloop.counter|divisibleby:3 %}
@@ -43,7 +43,7 @@
 $(document).ready(function(){
 $(".skill").hover(function () {
     // $(this).transition("bounce");
-    $(this).toggleClass("inverted yellow")
+    $(this).toggleClass("inverted ")
  });
 
 

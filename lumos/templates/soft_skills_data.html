@@ -14,16 +14,47 @@
 <body>
 <div class="ui stackable container menu">
   <div class="item">
-    <img src="assets/images/logo.png">
+    <!-- <img src="assets/images/logo.png"> -->
   </div>
   <a class="item">Features</a>
   <a class="item">Testimonials</a>
   <a class="item">Sign-in</a>
 </div>
 
-<div class="ui middle aligned center aligned grid">
+<div class="ui center aligned">
+<div class="ui main middle aligned segment">
+    <div class="ui segment">
+    <h1 class="ui center aligned header"> {{display_data.name}} </h1>
+    {% if display_data.desc %}
+        <p>{{display_data.desc}}</p>
+    {% endif %}
+    </div>
+    {% for row in display_data.data %}
+    <div class="ui raised segment diff_lvl_{{ row.difficulty }} row_data ">
+        <h3 class="ui header ">
+            {{ row.title }}
+        </h3>
+            {% if row.data_desc %}
+              <p>{{ row.data_desc }}</p>
+            {% endif %}
+    </div>
+    {% endfor %}
+</div><!-- main -->
+</div><!-- center aligned -->
 
-</div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.diff_lvl_0').addClass("inverted green");
+  $('.diff_lvl_1').addClass("inverted yellow");
+  $('.diff_lvl_2').addClass("inverted orange");
+  
+  $(".row_data").hover(function () {  
+    // $(this).transition("bounce");
+    $(this).toggleClass("inverted ")
+ });
 
+
+});//document ready
+</script>
 </body>
 </html>

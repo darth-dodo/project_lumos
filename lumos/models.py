@@ -13,6 +13,7 @@ def convert_to_dict(obj):
 
 class ProgLang(models.Model):
     name = models.CharField(max_length=20,null=True,default=None)
+    desc = models.TextField(null=True,blank=True)
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
@@ -60,6 +61,7 @@ class KnowledgeBase(models.Model):
 
 class SoftSkills(models.Model):
     name = models.CharField(max_length=100)
+    desc = models.TextField(null=True,blank=True)
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)

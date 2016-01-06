@@ -75,8 +75,37 @@ def soft_skills_landing(request):
     all_soft_skills = sorted([a.title() for a in all_soft_skills])
     return render(request, 'soft_skills_landing.html', {'all_soft_skills' : all_soft_skills})
 
+def soft_skills_landing_col(request):
+    all_soft_skills = SoftSkills.objects.filter(active=1).values_list('name', flat=True)
+    all_soft_skills = sorted([a.title() for a in all_soft_skills])
+    return render(request, 'soft_skills_landing_column.html', {'all_soft_skills' : all_soft_skills})
+
+def soft_skills_landing_but(request):
+    all_soft_skills = SoftSkills.objects.filter(active=1).values_list('name', flat=True)
+    all_soft_skills = sorted([a.title() for a in all_soft_skills])
+    return render(request, 'soft_skills_landing_button.html', {'all_soft_skills' : all_soft_skills})
+
+
 def soft_skill_data(request, skill):
     print skill
-    return_data = SoftSkillsData.objects.filter(active=1,soft_skill__name=skill)
-    print return_data
-    return render(request, 'soft_skills_data.html', {'display_data' : return_data})
+    display_data = {}
+    display_data['name'] = skill
+    display_data['desc'] = SoftSkills.objects.filter(name=skill).values_list('desc',flat=True)
+    all_entries = SoftSkillsData.objects.filter(active=1,soft_skill__name=skill)
+    display_data['data'] = []
+    for entry in all_entries:
+        current_entry = {}
+        current_entry['title'] = entry.title
+        # for converting links into iframe
+        # current_entry['link'] = (entry.link).replace("watch?v=","embed/").replace("&list","?list")
+        current_entry['link'] = entry.link
+        current_entry['difficulty'] = entry.difficulty
+        current_entry['diff_sort'] = entry.diff_sort
+        current_entry['media_type'] = entry.media_type
+        current_entry['data_desc'] = entry.desc
+        display_data['data'].append(current_entry)
+
+    display_data['data'] = sorted(display_data['data'], key=lambda x: (int(x['difficulty']), int(x['diff_sort'])))
+
+    print display_data
+    return render(request, 'soft_skills_data.html', {'display_data' : display_data})
