@@ -98,61 +98,10 @@
 </div><!-- ui main -->
 
 <br/><br/><br/><br/><br/><br/>
-
-
-<div class="ui center aligned">
-    <div class="ui main middle aligned segment">
-        <div class="ui segment">
-            <h1 class="ui center aligned header"> {{display_data.name}} </h1>
-            {% if display_data.desc %}
-                <p>{{display_data.desc}}</p>
-            {% endif %}
-        </div>
-        {% for row in display_data.data %}
-        <div class="ui raised segment diff_lvl_{{ row.difficulty }} row_data ">
-            <h3 class="ui header ">
-            {{ row.title }}
-            </h3>
-            {% if row.data_desc %}
-              <p>{{ row.data_desc }}</p>
-            {% endif %}
-        </div>
-        {% endfor %}
-    </div><!-- main -->
-</div><!-- center aligned -->
-
-<br/><br/><br/><br/><br/><br/>
-
-<div class="ui center aligned grid">
-  <div class="ui middle aligned stackable two column divided grid container">
-<h1 class="ui header">{{display_data.name}}</h1>
- <div class="row">
-    {% for row in display_data.data %}
-      <div class="six wide column">
-                <div class="ui raised segment diff_lvl_{{ row.difficulty }} row_data "> 
-                    <a {% if row.link %} href="{{row.link}}" target="_blank" {% else %} href="#" {%endif%}style="color:inherit;">
-                    <h3 class="ui header" style="color:inherit;">
-                        {{ row.title }}
-                    </h3>
-                        {% if row.data_desc %}
-                          
-                          <p>{{ row.data_desc }}</p>
-                        {% endif %}
-                </a>
-                </div>
-      </div>
-    {% if forloop.counter|divisibleby:2 %}
-   </div>
-   <div class="row">
-    {% endif %}
-  {% endfor %}
-   </div>
-  </div>
-</div>
 {%endif%}
 
 <!-- feedback form modal -->
-<div class="ui inverted fullscreen modal" id="feedback-modal">
+<div class="ui inverted small modal" id="feedback-modal">
   <div class="header"><h2 class="ui teal header center aligned">
         You are awesome! ^__^
     </h2></div>
@@ -177,7 +126,7 @@
                     <div class="field">
                     <i class="write icon"></i>
                         <div class="ui left icon input">
-                            <textarea id="feedback" placeholder="Type in your feedback" class="feedback-data"></textarea>
+                            <textarea id="feedback" placeholder="Type in your feedback*" class="feedback-data"></textarea>
                             
                         </div>
                     </div><!-- textarea -->

@@ -15,7 +15,7 @@ def knowledge_base_landing(request):
     print all_prog_langs
     return render (request, 'knowledge_base_landing.html', {"all_prog_langs" : all_prog_langs})
 
-def knowledge_base(request):
+def knowledge_base_all(request):
     return_data = []
     all_langs = ProgLang.objects.filter(active=1).order_by('name')
     for lang in all_langs:
@@ -44,7 +44,7 @@ def knowledge_base(request):
             return_data.append(current_lang)
     return render (request, 'knowledge_base.html', {'data' : return_data})
 
-def knowledge_base_opti(request,lang):
+def knowledge_base_data(request,lang):
     print lang
     display_data = {}
 
@@ -73,22 +73,12 @@ def knowledge_base_opti(request,lang):
             display_data['data'].append(current_entry)
 
             display_data['data'] = sorted(display_data['data'], key=lambda x: (int(x['difficulty']), int(x['diff_sort'])))
-    return render(request, 'knowledge_base_opti.html', {"display_data" : display_data})
+    return render(request, 'knowledge_base_data.html', {"display_data" : display_data})
  
 def soft_skills_landing(request):
     all_soft_skills = SoftSkills.objects.filter(active=1).values_list('name', flat=True)
     all_soft_skills = sorted([a.title() for a in all_soft_skills])
     return render(request, 'soft_skills_landing.html', {'all_soft_skills' : all_soft_skills})
-
-def soft_skills_landing_col(request):
-    all_soft_skills = SoftSkills.objects.filter(active=1).values_list('name', flat=True)
-    all_soft_skills = sorted([a.title() for a in all_soft_skills])
-    return render(request, 'soft_skills_landing_column.html', {'all_soft_skills' : all_soft_skills})
-
-def soft_skills_landing_but(request):
-    all_soft_skills = SoftSkills.objects.filter(active=1).values_list('name', flat=True)
-    all_soft_skills = sorted([a.title() for a in all_soft_skills])
-    return render(request, 'soft_skills_landing_button.html', {'all_soft_skills' : all_soft_skills})
 
 
 def soft_skill_data(request, skill):
@@ -118,6 +108,16 @@ def soft_skill_data(request, skill):
 
     print display_data
     return render(request, 'soft_skills_data.html', {'display_data' : display_data})
+
+def soft_skills_landing_col(request):
+    all_soft_skills = SoftSkills.objects.filter(active=1).values_list('name', flat=True)
+    all_soft_skills = sorted([a.title() for a in all_soft_skills])
+    return render(request, 'soft_skills_landing_column.html', {'all_soft_skills' : all_soft_skills})
+
+def soft_skills_landing_but(request):
+    all_soft_skills = SoftSkills.objects.filter(active=1).values_list('name', flat=True)
+    all_soft_skills = sorted([a.title() for a in all_soft_skills])
+    return render(request, 'soft_skills_landing_button.html', {'all_soft_skills' : all_soft_skills})
 
 @csrf_exempt
 def feedback_form(request):
