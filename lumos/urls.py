@@ -6,7 +6,7 @@ urlpatterns = [
    url(r'^technical/$', views.tech_landing),
    url(r'^technical/knowledge-base/$', views.knowledge_base),
    url(r'^soft-skills/$', views.soft_skills_landing),
-   url(r'^soft-skills/(?P<skill>.+)$', views.tech_landing),
+   url(r'^soft-skills/(?P<skill>.+)$', views.soft_skill_data),
    
    
 
