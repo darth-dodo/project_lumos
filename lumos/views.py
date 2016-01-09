@@ -11,9 +11,9 @@ def tech_landing(request):
     return render(request, 'tech_landing.html')
 
 def knowledge_base_landing(request):
-    all_prog_langs = ProgLang.objects.filter(active=1).order_by('id').values_list('name',flat=True)
+    all_prog_langs = ProgLang.objects.filter(active=1).order_by('id')
     print all_prog_langs
-    return render (request, 'knowledge_base_landing.html', {"all_prog_langs" : all_prog_langs})
+    return render (request, 'knowledge_base_landing.html', {"return_data" : all_prog_langs})
 
 def knowledge_base_all(request):
     return_data = []
@@ -44,55 +44,9 @@ def knowledge_base_all(request):
             return_data.append(current_lang)
     return render (request, 'knowledge_base.html', {'data' : return_data})
 
-def knowledge_base_data(request,lang):
-    print lang
-    display_data = {}
-
-    entries = KnowledgeBase.objects.filter(active=1,prog_lang__name=lang).order_by('diff_sort')
-    display_data['name'] = lang
-
-    lang_desc = ProgLang.objects.filter(name=lang).values_list('desc',flat=True)
-    print lang_desc
-    if lang_desc:
-        display_data['desc'] = lang_desc[0]
-    else:
-        display_data['desc'] = None
-    print display_data
-    if entries:
-        display_data['data'] = []
-        for entry in entries:
-            current_entry = {}
-            current_entry['title'] = entry.title
-            # for converting links into iframe
-            # current_entry['link'] = (entry.link).replace("watch?v=","embed/").replace("&list","?list")
-            current_entry['link'] = entry.link
-            current_entry['difficulty'] = entry.difficulty
-            current_entry['diff_sort'] = entry.diff_sort
-            current_entry['media_type'] = entry.media_type
-            current_entry['data_desc'] = entry.desc
-            display_data['data'].append(current_entry)
-
-            display_data['data'] = sorted(display_data['data'], key=lambda x: (int(x['difficulty']), int(x['diff_sort'])))
-    return render(request, 'knowledge_base_data.html', {"display_data" : display_data})
- 
-def soft_skills_landing(request):
-    all_soft_skills = SoftSkills.objects.filter(active=1).values_list('name', flat=True)
-    all_soft_skills = sorted([a.title() for a in all_soft_skills])
-    return render(request, 'soft_skills_landing.html', {'all_soft_skills' : all_soft_skills})
-
-
-def soft_skill_data(request, skill):
-    print skill
-    display_data = {}
-    display_data['name'] = skill
-    skill_desc = SoftSkills.objects.filter(name=skill).values_list('desc',flat=True)
-    if skill_desc:
-        display_data['desc'] = skill_desc[0]
-    else:
-        display_data['desc'] = None
-    all_entries = SoftSkillsData.objects.filter(active=1,soft_skill__name=skill)
-    display_data['data'] = []
-    for entry in all_entries:
+def get_display_data(raw_data):
+    return_data = []
+    for entry in raw_data:
         current_entry = {}
         current_entry['title'] = entry.title
         # for converting links into iframe
@@ -102,22 +56,45 @@ def soft_skill_data(request, skill):
         current_entry['diff_sort'] = entry.diff_sort
         current_entry['media_type'] = entry.media_type
         current_entry['data_desc'] = entry.desc
-        display_data['data'].append(current_entry)
+        return_data.append(current_entry)
+    return_data = sorted(return_data, key=lambda x: (int(x['difficulty']), int(x['diff_sort'])))
 
-    display_data['data'] = sorted(display_data['data'], key=lambda x: (int(x['difficulty']), int(x['diff_sort'])))
+    return return_data
 
-    print display_data
-    return render(request, 'soft_skills_data.html', {'display_data' : display_data})
+def knowledge_base_data(request,slug):
+    print slug
+    display_data = {}
 
-def soft_skills_landing_col(request):
-    all_soft_skills = SoftSkills.objects.filter(active=1).values_list('name', flat=True)
-    all_soft_skills = sorted([a.title() for a in all_soft_skills])
-    return render(request, 'soft_skills_landing_column.html', {'all_soft_skills' : all_soft_skills})
+    slug_details = ProgLang.objects.get(slug=slug)
+    raw_data = KnowledgeBase.objects.filter(active=1, prog_lang__slug=slug)
+    display_data['name'] = slug_details.name
+    display_data['desc'] = slug_details.desc if slug_details.desc else None
+    if len(raw_data):
+        display_data['data'] = get_display_data(raw_data)
+    else:
+        display_data['data'] = None
+    
+    return render(request, 'knowledge_base_data.html', {"display_data" : display_data})
 
-def soft_skills_landing_but(request):
-    all_soft_skills = SoftSkills.objects.filter(active=1).values_list('name', flat=True)
-    all_soft_skills = sorted([a.title() for a in all_soft_skills])
-    return render(request, 'soft_skills_landing_button.html', {'all_soft_skills' : all_soft_skills})
+def soft_skills_landing(request):
+    all_soft_skills = SoftSkills.objects.filter(active=1)
+    return render(request, 'soft_skills_landing.html', {'all_soft_skills' : all_soft_skills})
+
+def soft_skills_data(request,slug):
+    print slug
+    display_data = {}
+
+    slug_details = SoftSkills.objects.get(slug=slug)
+    raw_data = SoftSkillsData.objects.filter(active=1, soft_skill__slug=slug)
+    display_data['name'] = slug_details.name
+    display_data['desc'] = slug_details.desc if slug_details.desc else None
+    if len(raw_data):
+        display_data['data'] = get_display_data(raw_data)
+    else:
+        display_data['data'] = None
+    
+    return render(request, 'knowledge_base_data.html', {"display_data" : display_data})
+ 
 
 @csrf_exempt
 def feedback_form(request):

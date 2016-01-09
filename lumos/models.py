@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 
 # Create your models here.
 def unicode_class(obj):
@@ -17,7 +18,11 @@ class ProgLang(models.Model):
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    slug = models.SlugField()
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(ProgLang, self).save(*args, **kwargs)
     def __unicode__(self):
         return unicode_class(self)
 
@@ -65,10 +70,17 @@ class SoftSkills(models.Model):
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    slug = models.SlugField()
+   
+    def clean(self):
+        self.name = self.name.title()
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(SoftSkills, self).save(*args, **kwargs)
+        
     def __unicode__(self):
         return unicode_class(self)
-
     def to_dict(self):
         return convert_to_dict(self)
     

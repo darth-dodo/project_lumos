@@ -33,10 +33,10 @@
 <div class="ui middle aligned center aligned grid">
   <div class="ui stackable three column divided grid container">
     <div class="row">
-    {% for lang in all_prog_langs %}
+    {% for data in return_data %}
       <div class="three wide column">
-        <a href="{{lang}}" style="color:inherit;">
-          <div class="ui segment skill">{{lang}}</div>
+        <a href="{{data.slug}}" style="color:inherit;">
+          <div class="ui segment skill">{{data.name}}</div>
         </a>
       </div>
     {% if forloop.counter|divisibleby:3 %}

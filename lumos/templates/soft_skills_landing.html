@@ -37,8 +37,8 @@
     <div class="row">
     {% for skill in all_soft_skills %}
       <div class="three wide column">
-        <a href="{{skill}}" style="color:inherit;">
-          <div class="ui segment skill">{{skill}}</div>
+        <a href="{{skill.slug}}" style="color:inherit;">
+          <div class="ui segment skill">{{skill.name}}</div>
         </a>
       </div>
     {% if forloop.counter|divisibleby:3 %}
