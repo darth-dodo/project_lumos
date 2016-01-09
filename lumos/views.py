@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import ProgLang, KnowledgeBase, SoftSkills, SoftSkillsData, UserFeedback
+from .models import ProgLang, KnowledgeBase, SoftSkills, SoftSkillsData, UserFeedback, ProjectBase
 from django.views.decorators.csrf import csrf_exempt
 import json
 # Create your views here.
@@ -110,3 +110,37 @@ def feedback_form(request):
         print user_feedback
         user_feedback.save()
     return HttpResponse(json.dumps(True))
+
+def project_base(request):
+    all_projects = ProjectBase.objects.filter(active=1).order_by('difficulty','diff_sort')
+    return_data = []
+    for project in all_projects:
+        curr_proj = {}
+        curr_proj['id'] = project.id
+        curr_proj['title'] = project.title
+        curr_proj['link'] = project.link
+        curr_proj['desc'] = project.desc
+        curr_proj['difficulty'] = project.difficulty
+        curr_proj['all_langs'] = [lang.name for lang in project.prog_lang.all()]
+
+        return_data.append(curr_proj)
+    return render(request, 'project_base.html', {'return_data' : return_data})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
