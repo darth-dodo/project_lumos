@@ -67,7 +67,7 @@
     <div class="row">
     {% for project in return_data %}
       <div class="three wide column">
-        <a href="#" style="color:inherit;" 
+        <a href="{{ project.link }}" target="_blank" style="color:inherit;" 
         data-desc="{{ project.desc }}" data-link="{{ project.link }}" >
           <div class="ui segment project diff_lvl_{{ project.difficulty }}" data-id="{{ project.id }}">
           <h3>{{ project.title }}</h3>
@@ -75,6 +75,7 @@
               | {% for lang in project.all_langs %}
                   {{ lang }} | 
               {% endfor %}
+            <p>{{ project.desc }}</p>              
           </p>
           </div>
         </a>
