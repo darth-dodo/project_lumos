@@ -13,7 +13,7 @@ def convert_to_dict(obj):
     return obj.__dict__
 
 class ProgLang(models.Model):
-    name = models.CharField(max_length=20,null=True,default=None)
+    name = models.CharField(max_length=100,null=True,unique=True)
     desc = models.TextField(null=True,blank=True)
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -65,7 +65,7 @@ class KnowledgeBase(models.Model):
         db_table = 'tech_knowlege_base'
 
 class SoftSkills(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100,null=True,unique=True)
     desc = models.TextField(null=True,blank=True)
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -78,7 +78,7 @@ class SoftSkills(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(SoftSkills, self).save(*args, **kwargs)
-        
+
     def __unicode__(self):
         return unicode_class(self)
     def to_dict(self):
