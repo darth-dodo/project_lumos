@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (ProgLang, KnowledgeBase, SoftSkills, SoftSkillsData,
-                     ProjectBase, UserFeedback)
+                     ProjectBase, UserFeedback, RandomStuff)
 
 
 class ProgLangAdmin(admin.ModelAdmin):
@@ -15,3 +15,4 @@ admin.site.register(SoftSkills, SoftSkillsAdmin)
 admin.site.register(SoftSkillsData)
 admin.site.register(ProjectBase)
 admin.site.register(UserFeedback)
+admin.site.register(RandomStuff)

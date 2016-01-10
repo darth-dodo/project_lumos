@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import ProgLang, KnowledgeBase, SoftSkills, SoftSkillsData, UserFeedback, ProjectBase
+from .models import ProgLang, KnowledgeBase, SoftSkills, SoftSkillsData, UserFeedback, ProjectBase, RandomStuff
 from django.views.decorators.csrf import csrf_exempt
 import json
 # Create your views here.
@@ -125,19 +125,15 @@ def feedback_form(request):
         user_feedback.save()
     return HttpResponse(json.dumps(True))
 
+def stuff_to_know(request):
+    all_stuff = RandomStuff.objects.filter(active=1).order_by('id')
+    return_data = []
+    for stuff in all_stuff:
+        curr_stuff = {}
+        curr_stuff['id'] = project.id
+        curr_stuff['title'] = project.title
+        curr_stuff['link'] = project.link
+        curr_stuff['desc'] = project.desc
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return_data.append(curr_stuff)
+    return render(request, 'stuff.html', {'return_data' : return_data})

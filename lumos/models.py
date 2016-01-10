@@ -168,3 +168,27 @@ class UserFeedback(models.Model):
     
     class Meta:
         db_table = 'user_feedback'
+
+class RandomStuff(models.Model):
+    title = models.CharField(max_length=200)
+    link = models.CharField(max_length=200)
+    desc = models.TextField()
+    active = models.BooleanField(default=True)
+    data_type = (
+                (0, 'Video'),
+                (1, 'Article'),
+                (2, 'Interactive Site'),
+                (3, 'Other')
+                )
+    media_type = models.IntegerField(choices=data_type, default=3)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return unicode_class(self)
+
+    def to_dict(self):
+        return convert_to_dict(self)
+    
+    class Meta:
+        db_table = 'random_stuff'

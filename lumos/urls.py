@@ -9,5 +9,6 @@ urlpatterns = [
    url(r'^technical/knowledge-base/(?P<slug>.+)$', views.knowledge_base_data),
    url(r'^soft-skills/$', views.soft_skills_landing),
    url(r'^soft-skills/(?P<slug>.+)$', views.soft_skills_data),
-   url(r'^feedback-form/$', views.feedback_form),   
-]
+   url(r'^feedback-form/$', views.feedback_form), 
+   url(r'^technical/awesome-stuff/$', views.stuff_to_know),
+   ]
