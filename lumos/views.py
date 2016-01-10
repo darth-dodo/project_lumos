@@ -130,10 +130,10 @@ def stuff_to_know(request):
     return_data = []
     for stuff in all_stuff:
         curr_stuff = {}
-        curr_stuff['id'] = project.id
-        curr_stuff['title'] = project.title
-        curr_stuff['link'] = project.link
-        curr_stuff['desc'] = project.desc
+        curr_stuff['id'] = stuff.id
+        curr_stuff['title'] = stuff.title
+        curr_stuff['link'] = stuff.link
+        curr_stuff['desc'] = stuff.desc
 
         return_data.append(curr_stuff)
     return render(request, 'stuff.html', {'return_data' : return_data})
