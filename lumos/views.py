@@ -68,7 +68,7 @@ def get_display_data(raw_data):
 def knowledge_base_data(request,slug):
     print slug
     display_data = {}
-    display_data['type'] = 'Technical Skills'
+    display_data['type'] = 'Knowledge Base'
     slug_details = ProgLang.objects.get(slug=slug)
     raw_data = KnowledgeBase.objects.filter(active=1, prog_lang__slug=slug)
     display_data['name'] = slug_details.name

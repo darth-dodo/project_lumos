@@ -53,9 +53,10 @@
     </div>
 </div>
 <!-- menu close -->
-<br/><br/><br/><br/><br/><br/>
+<h2 class="ui header segment">Project Base</h2>
+<br/><br/><br/>
 <div class="ui main">
-  <div class="ui stackable three column divided center aligned grid container">
+  <div class="ui stackable four column divided center aligned grid container">
     <div class="row">
     {% for project in return_data %}
       <div class="three wide column">
@@ -67,8 +68,9 @@
               | {% for lang in project.all_langs %}
                   {{ lang }} | 
               {% endfor %}
+          
           <p id="project_id_{{ project.id }}" style="display:none;">
-          {{ project.desc }}</p>              
+          <br/>{{ project.desc }}</p>              
           </p>
           </div>
         </a>
