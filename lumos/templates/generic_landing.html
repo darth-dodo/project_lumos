@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 <head>
   <!-- Standard Meta -->
@@ -6,19 +7,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Knowledge Base</title>
+  <title>{{ page_title}}</title>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+    {% if page_title == 'Soft Skills'%}
+      <script type="text/javascript" src="{% static 'js/soft_skills_landing.js' %}"></script>
+    {% elif page_title == 'Technical Skills'%}
+      <script type="text/javascript" src="{% static 'js/technical_skills_landing.js' %}"></script>
+    {% endif %}
+
 </head>
 <body>
-
+<!-- menu -->
 <div class="ui stackable menu">
   <div class="item">
     <a href="/"><i class="large home icon"></i></a>
   </div>
   <a class="item" href="/technical/">Technical Skills</a>
-    <div class="ui simple dropdown item">
+  <div class="ui simple dropdown item">
       Extra
       <i class="dropdown icon"></i>
       <div class="menu">
@@ -28,15 +35,17 @@
       </div>
     </div>
 </div>
-<br/><br/><br/><br/><br/><br/>
+<!-- menu close -->
 
-<div class="ui middle aligned center aligned grid">
-  <div class="ui stackable three column divided grid container">
+<!-- figure out centering css -->
+<br/><br/><br/><br/><br/><br/>
+<div class="ui main">
+  <div class="ui stackable three column divided center aligned grid container">
     <div class="row">
-    {% for data in return_data %}
+    {% for entry in return_data %}
       <div class="three wide column">
-        <a href="{{data.slug}}" style="color:inherit;">
-          <div class="ui segment skill">{{data.name}}</div>
+        <a href="{{entry.slug}}" style="color:inherit;">
+          <div class="ui segment skill">{{entry.name}}</div>
         </a>
       </div>
     {% if forloop.counter|divisibleby:3 %}
@@ -45,18 +54,8 @@
     {% endif %}
   {% endfor %}
    </div>
-  </div>
 </div>
-
-<script type="text/javascript">
-$(document).ready(function(){
-$(".skill").hover(function () {
-    // $(this).transition("bounce");
-    $(this).toggleClass("inverted red")
- });
-
-
-});//document ready
-</script>
+<br/><br/><br/><br/><br/>
+</div>
 </body>
 </html>

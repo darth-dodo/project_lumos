@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 <head>
   <!-- Standard Meta -->
@@ -10,18 +11,10 @@
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
-
-    <style type="text/css">
-    body {
-      background-color: #DADADA;
-    }
-    .snap-grid {
-      height: 100%;
-    }
-    .snap-column {
-      max-width: 450px;
-    }
-  </style>
+  <script type="text/javascript" src="{% static 'js/feedback_form.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/feedback_form.css' %}"/>
+  <script type="text/javascript" src="{% static 'js/data_display.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/data_display.css' %}"/>
 </head>
 <body>
 
@@ -33,7 +26,7 @@
         Oh Snap!
     </h2>
     <div class="ui large form">
-      <div class="ui stacked segment">
+      <div class="ui fluid segment">
         <p id="feedback">Seems like currently there is no data present for <b>{{display_data.name}}</b>!
         Please visit later or provide requirements in the <br/><a href="#">Feedback form</a> </p>
         <a href="/">
@@ -47,12 +40,15 @@
 {%else%}
 
 
-
 <div class="ui stackable menu">
   <div class="item">
     <a href="/"><i class="large home icon"></i></a>
   </div>
-  <a class="item" href="/technical/">Technical Skills</a>
+  {% if display_data.type = 'Soft Skills'%}
+  <a class="item" href="/soft-skills/">Soft Skills</a>
+  {% elif display_data.type = 'Technical Skills' %}
+  <a class="item" href="/technical-skills/">Technical Skills</a>
+  {% endif %}
     <div class="ui simple dropdown item">
       Extra
       <i class="dropdown icon"></i>
@@ -66,18 +62,20 @@
 
 <div class="ui main">
   <div class="ui header segment">
-    <h1 class="ui header">Knowledge Base</h1>
+    <h1 class="ui header">{{display_data.type}}</h1>
   </div>
- 
+
 <div class="ui one column stackable page grid">
       <!-- negative space -->
       <div class="column two wide"></div>
+      <!-- negative space -->
             <div class="column twelve wide">
                 <div class="ui segment">
                     <h1 class="ui header"> {{display_data.name}} </h1>
                         {% if display_data.desc %}
                             <p>{{display_data.desc}}</p>
                         {% endif %}
+
                 {% for row in display_data.data %}
                 
                 <div class="ui raised segment diff_lvl_{{ row.difficulty }} row_data "> 
@@ -97,7 +95,6 @@
     </div>
 </div><!-- ui main -->
 
-<br/><br/><br/><br/><br/><br/>
 {%endif%}
 
 <!-- feedback form modal -->
@@ -139,80 +136,5 @@
 </div><!-- modal -->
 
 <!-- feedback form modal  -->
-
-<script type="text/javascript">
-$(document).ready(function(){
-  $('.diff_lvl_0').addClass("inverted green");
-  $('.diff_lvl_1').addClass("inverted yellow");
-  $('.diff_lvl_2').addClass("inverted orange");
-  
-  $("#submit").click(function(){
-      var proceed = true;
-      $(".feedback-data").each(function(){
-        $(this).css('border-color','');
-        // console.log(this);
-        if(!$.trim($(this).val())){ //if this field is empty
-            $(this).css('border-color','red'); //change border color to red
-            
-            proceed = false; //set do not proceed flag
-            alert("Please provide appropriate data");
-            return false;
-        }
-        //check invalid email
-        var email_reg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-        // console.log($(this).val());
-        if($(this).attr("name")=="email"
-           && !email_reg.test($.trim($(this).val())))
-        {
-            $(this).css('border-color','red'); //change border color to red
-            alert('Please provide valid email!');
-            proceed = false; //set do not proceed flag
-            return false;
-        }
-        });//finishing validations
-      console.log(proceed);
-      if (proceed){
-        var feedback_data = {}
-        username = $("#username").val();
-        console.log(username);
-        if (username)
-              {
-                feedback_data['username'] = username
-              }
-        else{
-            feedback_data['username'] = 'Anon'
-        } 
-        feedback_data['email'] = $("#email").val().trim()
-        feedback_data['feedback'] = $("textarea#feedback").val().trim()
-        console.log(feedback_data);
-        $.ajax({
-            type : 'POST',
-            url : '/feedback-form/',
-            data :JSON.stringify(feedback_data)
-            ,dataType : "json"
-            ,success : function(data){
-                alert("Thanks for providing feedback! :)");
-                window.location.replace('/');
-            }
-            ,error : function(data){
-                alert("Oh shucks! Feedback not saved! Please try again!");
-            }
-        });//ajax call
-      }
-});// submit fucntion
-
-
-
-  $(".row_data").hover(function () {  
-    // $(this).transition("bounce");
-    $(this).toggleClass("inverted ")
- });
-
-$("#feedback").click(function(){
-$('#feedback-modal').modal('show');
-})
-
-});//document ready
-</script>
 </body>
 </html>

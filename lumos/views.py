@@ -8,12 +8,16 @@ def hello(request):
     return render(request, 'home.html')
 
 def tech_landing(request):
-    return render(request, 'tech_landing.html')
+    return render(request, 'tech_listing.html')
 
 def knowledge_base_landing(request):
-    all_prog_langs = ProgLang.objects.filter(active=1).order_by('id')
-    print all_prog_langs
-    return render (request, 'knowledge_base_landing.html', {"return_data" : all_prog_langs})
+    return_data = ProgLang.objects.filter(active=1).order_by('id')
+    print return_data
+    return render(request, 'generic_landing.html', {'return_data' : return_data ,'page_title' : 'Technical Skills'})
+
+def soft_skills_landing(request):
+    all_soft_skills = SoftSkills.objects.filter(active=1)
+    return render(request, 'generic_landing.html', {'return_data' : all_soft_skills ,'page_title' : 'Soft Skills'})
 
 def knowledge_base_all(request):
     return_data = []
@@ -64,7 +68,7 @@ def get_display_data(raw_data):
 def knowledge_base_data(request,slug):
     print slug
     display_data = {}
-
+    display_data['type'] = 'Technical Skills'
     slug_details = ProgLang.objects.get(slug=slug)
     raw_data = KnowledgeBase.objects.filter(active=1, prog_lang__slug=slug)
     display_data['name'] = slug_details.name
@@ -74,16 +78,12 @@ def knowledge_base_data(request,slug):
     else:
         display_data['data'] = None
     
-    return render(request, 'knowledge_base_data.html', {"display_data" : display_data})
-
-def soft_skills_landing(request):
-    all_soft_skills = SoftSkills.objects.filter(active=1)
-    return render(request, 'soft_skills_landing.html', {'all_soft_skills' : all_soft_skills})
+    return render(request, 'data_display.html', {"display_data" : display_data})
 
 def soft_skills_data(request,slug):
     print slug
     display_data = {}
-
+    display_data['type'] = 'Soft Skills'
     slug_details = SoftSkills.objects.get(slug=slug)
     raw_data = SoftSkillsData.objects.filter(active=1, soft_skill__slug=slug)
     display_data['name'] = slug_details.name
@@ -93,24 +93,8 @@ def soft_skills_data(request,slug):
     else:
         display_data['data'] = None
     
-    return render(request, 'knowledge_base_data.html', {"display_data" : display_data})
+    return render(request, 'data_display.html', {"display_data" : display_data})
  
-
-@csrf_exempt
-def feedback_form(request):
-    if request.method == 'POST' and request.is_ajax():
-        json_string = request.body.decode(encoding='UTF-8')
-        data = json.loads(json_string)
-        print data
-        username =  str(data['username'])
-        email = data['email']
-        feedback = str(data['feedback'])
-        print feedback
-        user_feedback = UserFeedback(username = username,email = email, feedback_note = feedback)
-        print user_feedback
-        user_feedback.save()
-    return HttpResponse(json.dumps(True))
-
 def project_base(request):
     all_projects = ProjectBase.objects.filter(active=1).order_by('difficulty','diff_sort')
     return_data = []
@@ -126,7 +110,20 @@ def project_base(request):
         return_data.append(curr_proj)
     return render(request, 'project_base.html', {'return_data' : return_data})
 
-
+@csrf_exempt
+def feedback_form(request):
+    if request.method == 'POST' and request.is_ajax():
+        json_string = request.body.decode(encoding='UTF-8')
+        data = json.loads(json_string)
+        print data
+        username =  str(data['username'])
+        email = data['email']
+        feedback = str(data['feedback'])
+        print feedback
+        user_feedback = UserFeedback(username = username,email = email, feedback_note = feedback)
+        print user_feedback
+        user_feedback.save()
+    return HttpResponse(json.dumps(True))
 
 
 

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 <head>
   <!-- Standard Meta -->
@@ -10,17 +11,8 @@
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
-<style type="text/css">
-    body {
-      background-color: #DADADA;
-    }
-    .snap-grid {
-      height: 100%;
-    }
-    .snap-column {
-      max-width: 450px;
-    }
-</style>
+  <script type="text/javascript" src="{% static 'js/project_base.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/data_display.css' %}"/>
 </head>
 <body>
 
@@ -62,8 +54,8 @@
 </div>
 <!-- menu close -->
 <br/><br/><br/><br/><br/><br/>
-<div class="ui middle aligned center aligned grid">
-  <div class="ui stackable three column divided grid container">
+<div class="ui main">
+  <div class="ui stackable three column divided center aligned grid container">
     <div class="row">
     {% for project in return_data %}
       <div class="three wide column">
@@ -88,26 +80,8 @@
   {% endfor %}
    </div>
 </div>
-</div>
+<br/><br/><br/><br/><br/>
 </div>
 {% endif %}
-<script type="text/javascript">
-$(document).ready(function(){
-$('.diff_lvl_0').addClass("inverted green");
-$('.diff_lvl_1').addClass("inverted yellow");
-$('.diff_lvl_2').addClass("inverted orange");
-
-$(".project").hover(function () {
-    project_id = ($(this).data("id"));
-    $(this).toggleClass("inverted")
-    $("#project_id_"+project_id).show();
-        },
-    function(){
-        $("#project_id_"+project_id).hide();
-        $(this).toggleClass("inverted") 
-      });
-
-});//document ready
-</script>
 </body>
 </html>

@@ -1,0 +1,6 @@
+    .snap-grid {
+      height: 100%;
+    }
+    .snap-column {
+      max-width: 450px;
+    }
