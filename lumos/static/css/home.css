@@ -1,9 +1,9 @@
   .ui.footer.segment {
-    margin: 5em 0em 0em;
+    /*margin: 5em 0em 0em;*/
     text-align: center;
     bottom: 0;
-    position: relative;
+    position: absolute;
     width: 100%;
-    height: auto;
-    padding: 2em 0em;
-  }
+    height: 100;
+    /*padding: 5em 0em;*/
+}
