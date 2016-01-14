@@ -11,12 +11,12 @@ def tech_landing(request):
     return render(request, 'tech_listing.html')
 
 def knowledge_base_landing(request):
-    return_data = ProgLang.objects.filter(active=1).order_by('id')
+    return_data = ProgLang.objects.filter(active=1)..order_by('sort_id')
     print return_data
     return render(request, 'generic_landing.html', {'return_data' : return_data ,'page_title' : 'Technical Skills'})
 
 def soft_skills_landing(request):
-    all_soft_skills = SoftSkills.objects.filter(active=1)
+    all_soft_skills = SoftSkills.objects.filter(active=1).order_by('sort_id')
     return render(request, 'generic_landing.html', {'return_data' : all_soft_skills ,'page_title' : 'Soft Skills'})
 
 def knowledge_base_all(request):

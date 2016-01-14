@@ -18,6 +18,7 @@ class ProgLang(models.Model):
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    sort_id = models.IntegerField(default=99)
     slug = models.SlugField()
 
     def save(self, *args, **kwargs):
@@ -70,6 +71,7 @@ class SoftSkills(models.Model):
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    sort_id = models.IntegerField(default=99)
     slug = models.SlugField()
    
     def clean(self):
@@ -125,6 +127,7 @@ class ProjectBase(models.Model):
     link = models.CharField(max_length=200)
     desc = models.TextField(null=True, blank=True)
     active = models.BooleanField(default=True)
+    sort_id = models.IntegerField(default=99)
     diff_levels = (
                 (0, 'Beginner'),
                 (1, 'Intermediate'),
@@ -174,6 +177,7 @@ class RandomStuff(models.Model):
     link = models.CharField(max_length=200)
     desc = models.TextField(null=True, blank=True)
     active = models.BooleanField(default=True)
+    sort_id = models.IntegerField(default=99)
     data_type = (
                 (0, 'Video'),
                 (1, 'Article'),
