@@ -134,7 +134,7 @@ class ProjectBase(models.Model):
     diff_sort = models.IntegerField(default=99)
     data_type = (
                 (0, 'Video'),
-               rticle'),
+                (1, 'Article'),
                 (2, 'Interactive Site'),
                 (3, 'Other')
                 )
@@ -153,7 +153,7 @@ class ProjectBase(models.Model):
         db_table = 'tech_project_base'
 
 class UserFeedback(models.Model):
-    username = models.CharField(max_length=200,default=None)
+    username = models.CharField(max_length=200, default=None)
     email = models.EmailField()
     feedback_note = models.TextField()
     active = models.BooleanField(default=True)
