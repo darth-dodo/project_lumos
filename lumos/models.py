@@ -36,7 +36,7 @@ class KnowledgeBase(models.Model):
     prog_lang = models.ForeignKey(ProgLang)
     title = models.CharField(max_length=200)
     link = models.CharField(max_length=200)
-    desc = models.TextField()
+    desc = models.TextField(null=True, blank=True)
     active = models.BooleanField(default=True)
     diff_levels = (
                 (0, 'Beginner'),
@@ -91,7 +91,7 @@ class SoftSkillsData(models.Model):
     soft_skill = models.ForeignKey(SoftSkills)
     title = models.CharField(max_length=200)
     link = models.CharField(max_length=200)
-    desc = models.TextField()
+    desc = models.TextField(null=True, blank=True)
     active = models.BooleanField(default=True)
     diff_levels = (
                 (0, 'Beginner'),
@@ -123,7 +123,7 @@ class ProjectBase(models.Model):
     prog_lang = models.ManyToManyField(ProgLang)
     title = models.CharField(max_length=200)
     link = models.CharField(max_length=200)
-    desc = models.TextField()
+    desc = models.TextField(null=True, blank=True)
     active = models.BooleanField(default=True)
     diff_levels = (
                 (0, 'Beginner'),
@@ -153,9 +153,9 @@ class ProjectBase(models.Model):
         db_table = 'tech_project_base'
 
 class UserFeedback(models.Model):
-    username = models.CharField(max_length=200,null=True,default=None)
+    username = models.CharField(max_length=200, null=True, blank=Truedefault=None)
     email = models.EmailField()
-    feedback_note = models.TextField(null=True,blank=True)
+    feedback_note = models.TextField()
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
@@ -172,7 +172,7 @@ class UserFeedback(models.Model):
 class RandomStuff(models.Model):
     title = models.CharField(max_length=200)
     link = models.CharField(max_length=200)
-    desc = models.TextField()
+    desc = models.TextField(null=True, blank=True)
     active = models.BooleanField(default=True)
     data_type = (
                 (0, 'Video'),
