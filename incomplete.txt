@@ -1,3 +1,0 @@
-- slugify urls to and from db
-- footer issues
-- generic page for slugified soft skills
