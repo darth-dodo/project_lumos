@@ -7,3 +7,8 @@
     height: auto;
     padding: 2em 0em;
   }
+body{
+    background : #000000 url('../images/type.png');
+    /*background-size: 100% 100%;*/
+    height:auto!;
+}
