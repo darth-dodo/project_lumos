@@ -31,6 +31,9 @@ ALLOWED_HOSTS = ['projectlumos.pythonanywhere.com']
 # Application definition
 
 INSTALLED_APPS = (
+    'flat',
+    'colorfield',
+    'admin_interface',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
