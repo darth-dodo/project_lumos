@@ -4,8 +4,4 @@
     .snap-column {
       max-width: 450px;
     }
-    body{
-    background : #000000 url('../images/type.png');
-    /*background-size: 100% 100%;*/
-    height:auto!;
-}
+    

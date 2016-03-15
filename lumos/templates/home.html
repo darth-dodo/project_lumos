@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
 <head>
   <!-- Standard Meta -->
@@ -7,76 +7,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>Project Lumos</title>
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+  <script src="../static/js/jquery-2.1.4.min.js"></script>
+  <link rel="stylesheet" href="../static/css/semantic.min.css"/>
+  <script src="../static/js/semantic.min.js"></script>
   <script type="text/javascript" src="../static/js/feedback_form.js"></script>
   <link rel="stylesheet" href="../static/css/feedback_form.css"/>
   <script type="text/javascript" src="../static/js/home.js"></script>
   <link rel="stylesheet" href="../static/css/home.css"/>
 </head>
 <body>
-
-  <br/><br/><br/>
-
-  <div class="ui grid page" id="main-container">
-    <div class="ui stackable two column center aligned grid container">
-      <div class="row">
-        <div class="ui four column wide">
+<br/><br/><br/>
+<div id="main-container" class="ui main">
+  <div class="ui stackable three column center aligned grid container">
+  <div class="row">
+      <div class="ui three column wide">
           <div class="ui inverted yellow segment">
-            <h1 class="ui header">
-              Welcome to Project Lumos!
-            </h1>
+              <h1 class="ui header">
+                  Welcome to Project Lumos!
+              </h1>
           </div>
-        </div>
       </div>
+  </div>
+  <div class="row"></div>
+  <div class="row"></div>
 
-      <div class="row"></div>
-      <div class="row"></div>
 
-
-      <div class="row">
+    <div class="row">
         <div class="ui four wide column">
-          <a href="technical/">
+            <a href="technical/">
             <div class="ui massive red inverted button">
-              Technical Skills
+            Technical Skills
             </div>
-          </a>
+            </a>
         </div>
-        <div class="ui four wide column">
-          <a href="soft-skills/">
-            <div class="ui massive blue inverted button">
-              Soft Skills
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="row"></div>
-      <div class="row"></div>
-
-      <div class="row">
         <div class="ui three wide column">
-          <div class="ui inverted green segment">Please pick a track!</div>
+            <a href="soft-skills/">
+            <div class="ui massive blue inverted button">
+            Soft Skills
+            </div>
+            </a>
         </div>
-      </div>
+    </div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row">
+        <div class="ui three wide column">
+            <div class="ui inverted green segment">Please pick a track!</div>
+        </div>
+    </div>
     </div>
   </div>
-
+  <div id="push"></div>
 </div>
-
-<footer>
-  <div class="ui center aligned container">
-    <div class="ui inverted vertical footer segment">
-      <p id='love'>Made with <i class="heart icon"></i>for DMCE</p>
-      <div class="ui inverted section divider"></div>
-      <div class="ui horizontal inverted small divided link list">
-        <a href="#" id="disclaimer" class="item" style="color: inherit;">Disclaimer</a>
-        <a class="item" id="feedback" class="item" style="color: inherit;">Feedback</a>
+<footer id="footer">
+<div class="ui inverted vertical footer segment">
+    <div class="ui center aligned container">
+    <p id='love'>Made with <i class="heart icon"></i>for DMCE</p>
+    <div class="ui inverted section divider"></div>
+    <div class="ui horizontal inverted small divided link list">
+        <a href="#" id="disclaimer" class="item" style="color: inhert;">Disclaimer</a>
+        <a class="item" id="feedback" class="item" style="color: inhert;">Feedback</a>
       </div>
     </div>
   </div>
 </footer>
+
 
 <!-- disclaimer modal -->
 <div class="ui small modal" id="disclaimer-modal">
