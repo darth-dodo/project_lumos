@@ -1,4 +1,5 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
+{% load staticfiles %}
 <html>
 <head>
   <!-- Standard Meta -->
@@ -7,13 +8,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>Project Lumos</title>
+
+  <!-- make sure only one block is active at any instance -->
+
+  <!-- production includes -->
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/feedback_form.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/feedback_form.css' %}"/>
+  <script type="text/javascript" src="{% static 'js/home.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/home.css' %}"/>
+
+  <!-- testing includes -->
+  <!-- 
   <script src="../static/js/jquery-2.1.4.min.js"></script>
   <link rel="stylesheet" href="../static/css/semantic.min.css"/>
   <script src="../static/js/semantic.min.js"></script>
   <script type="text/javascript" src="../static/js/feedback_form.js"></script>
   <link rel="stylesheet" href="../static/css/feedback_form.css"/>
   <script type="text/javascript" src="../static/js/home.js"></script>
-  <link rel="stylesheet" href="../static/css/home.css"/>
+  <link rel="stylesheet" href="../static/css/home.css"/> -->
 </head>
 <body>
 <br/><br/><br/>
@@ -65,15 +80,15 @@
     <p id='love'>Made with <i class="heart icon"></i>for DMCE</p>
     <div class="ui inverted section divider"></div>
     <div class="ui horizontal inverted small divided link list">
-        <a href="#" id="disclaimer" class="item" style="color: inhert;">Disclaimer</a>
-        <a class="item" id="feedback" class="item" style="color: inhert;">Feedback</a>
+        <a href="#" id="disclaimer" class="item" style="color: inherit;">Disclaimer</a>
+        <a class="item" id="feedback" class="item" style="color: inherit;">Feedback</a>
       </div>
     </div>
   </div>
 </footer>
 
 
-<!-- disclaimer modal -->
+<!-- disclaimer modal
 <div class="ui small modal" id="disclaimer-modal">
   <div class="header">Disclaimer</div>
   <div class="content">
