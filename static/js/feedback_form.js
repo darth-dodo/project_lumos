@@ -24,11 +24,11 @@ $(document).ready(function(){
             return false;
         }
         });//finishing validations
-      console.log(proceed);
+      // console.log(proceed);
       if (proceed){
         var feedback_data = {}
         username = $("#username").val();
-        console.log(username);
+        // console.log(username);
         if (username)
               {
                 feedback_data['username'] = username
@@ -38,7 +38,7 @@ $(document).ready(function(){
         } 
         feedback_data['email'] = $("#email").val().trim()
         feedback_data['feedback'] = $("textarea#feedback").val().trim()
-        console.log(feedback_data);
+        // console.log(feedback_data);
         $.ajax({
             type : 'POST',
             url : '/feedback-form/',

@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import ProgLang, KnowledgeBase, SoftSkills, SoftSkillsData, UserFeedback, ProjectBase, RandomStuff
+from lumos.utils import get_csv_data
 from django.views.decorators.csrf import csrf_exempt
 import json
-# Create your views here.
+import csv
+
 def hello(request):
     return render(request, 'home.html')
 
@@ -12,7 +14,6 @@ def tech_landing(request):
 
 def knowledge_base_landing(request):
     return_data = ProgLang.objects.filter(active=1).order_by('sort_id')
-    print return_data
     return render(request, 'generic_landing.html', {'return_data' : return_data ,'page_title' : 'Technical Skills'})
 
 def soft_skills_landing(request):
@@ -27,13 +28,11 @@ def knowledge_base_all(request):
         if entries:
             current_lang = {}
             current_lang['name'] = lang.name
-            # current_lang['lang_desc'] = lang.desc
             current_lang['data'] = []
+            
             for entry in entries:
                 current_entry = {}
                 current_entry['title'] = entry.title
-                # for converting links into iframe
-                # current_entry['link'] = (entry.link).replace("watch?v=","embed/").replace("&list","?list")
 
                 current_entry['link'] = entry.link
                 current_entry['difficulty'] = entry.difficulty
@@ -53,8 +52,6 @@ def get_display_data(raw_data):
     for entry in raw_data:
         current_entry = {}
         current_entry['title'] = entry.title
-        # for converting links into iframe
-        # current_entry['link'] = (entry.link).replace("watch?v=","embed/").replace("&list","?list")
         current_entry['link'] = entry.link
         current_entry['difficulty'] = entry.difficulty
         current_entry['diff_sort'] = entry.diff_sort
@@ -66,7 +63,6 @@ def get_display_data(raw_data):
     return return_data
 
 def knowledge_base_data(request,slug):
-    print slug
     display_data = {}
     display_data['type'] = 'Knowledge Base'
     slug_details = ProgLang.objects.get(slug=slug)
@@ -81,7 +77,6 @@ def knowledge_base_data(request,slug):
     return render(request, 'data_display.html', {"display_data" : display_data})
 
 def soft_skills_data(request,slug):
-    print slug
     display_data = {}
     display_data['type'] = 'Soft Skills'
     slug_details = SoftSkills.objects.get(slug=slug)
@@ -115,13 +110,10 @@ def feedback_form(request):
     if request.method == 'POST' and request.is_ajax():
         json_string = request.body.decode(encoding='UTF-8')
         data = json.loads(json_string)
-        print data
         username =  str(data['username'])
         email = data['email']
         feedback = str(data['feedback'])
-        print feedback
-        user_feedback = UserFeedback(username = username,email = email, feedback_note = feedback)
-        print user_feedback
+        user_feedback = UserFeedback(username=username, email=email, feedback_note=feedback)
         user_feedback.save()
     return HttpResponse(json.dumps(True))
 
@@ -137,3 +129,22 @@ def stuff_to_know(request):
 
         return_data.append(curr_stuff)
     return render(request, 'stuff.html', {'return_data' : return_data})
+
+def csv_gen_view(request, location_slug):
+    csv_name = "[PL] " + location_slug + ".csv"
+    print location_slug
+    print csv_name
+    csv_data = []
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="' + csv_name + '"'
+    writer = csv.writer(response)
+    csv_data = get_csv_data(location_slug)
+    print len(csv_data)
+    if csv_data:
+        for row in csv_data:
+            print row[0]
+            writer.writerow(row)
+        return response
+    else:
+        return HttpResponse(False)
