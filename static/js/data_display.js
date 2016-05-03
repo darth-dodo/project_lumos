@@ -5,7 +5,6 @@ $(document).ready(function(){
     $('.diff_lvl_2').addClass("inverted orange");
 
     $(".row_data").hover(function () {  
-        // $(this).transition("bounce");
         $(this).toggleClass("inverted ")
     });
 
