@@ -131,19 +131,15 @@ def stuff_to_know(request):
     return render(request, 'stuff.html', {'return_data' : return_data})
 
 def csv_gen_view(request, location_slug):
-    csv_name = "[PL] " + location_slug + ".csv"
-    print location_slug
-    print csv_name
+    csv_name = "[ProjectLumos] " + location_slug + ".csv"
     csv_data = []
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="' + csv_name + '"'
     writer = csv.writer(response)
     csv_data = get_csv_data(location_slug)
-    print len(csv_data)
     if csv_data:
         for row in csv_data:
-            print row[0]
             writer.writerow(row)
         return response
     else:
