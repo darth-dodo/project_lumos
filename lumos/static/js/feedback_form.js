@@ -13,7 +13,7 @@ $(document).ready(function(){
         }
         //check invalid email
         var email_reg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-\        if($(this).attr("name")=="email"
+        if($(this).attr("name")=="email"
            && !email_reg.test($.trim($(this).val())))
         {
             $(this).css('border-color','red'); //change border color to red
@@ -25,7 +25,7 @@ $(document).ready(function(){
       if (proceed){
         var feedback_data = {}
         username = $("#username").val();
-]        if (username)
+        if (username)
               {
                 feedback_data['username'] = username
               }

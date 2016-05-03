@@ -21,7 +21,6 @@ $(document).ready(function(){
         var location_slug = url_arr[url_arr.length - 1]
         console.log(location_slug);
         window.open('/csv_gen/'+location_slug,'_blank');
-        // fetchCsv(location_slug);
     });
 
 });//document ready
