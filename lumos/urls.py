@@ -11,4 +11,7 @@ urlpatterns = [
    url(r'^soft-skills/(?P<slug>.+)$', views.soft_skills_data),
    url(r'^feedback-form/$', views.feedback_form), 
    url(r'^technical/awesome-stuff/$', views.stuff_to_know),
+   url(r'^csv-generation/$', views.csv_gen_view),
+   url(r'^csv_gen/(?P<location_slug>.+)$', views.csv_gen_view),
+
    ]

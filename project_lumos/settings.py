@@ -25,7 +25,7 @@ SECRET_KEY = 'ie^4@c5)ud&-itihg6ahppu19!4xd-6x+96wct#x9-ro1xj6-l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['projectlumos.pythonanywhere.com']
+ALLOWED_HOSTS = ['projectlumos.pythonanywhere.com','127.0.0.1']
 
 
 # Application definition
