@@ -17,125 +17,125 @@
     <link rel="stylesheet" href="{% static 'css/home.css' %}"/>
 </head>
 <body>
-<br/><br/><br/>
+<div class="wrapper">
+  <br/><br/><br/>
+  <div class="ui container" id="main-container">
+    <div class="ui stackable three column center aligned grid container">
+      <div class="row">
+        <div class="ui three column wide">
+            <div class="ui inverted yellow segment">
+                <h1 class="ui header">
+                    Welcome to Project Lumos!
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="row"></div>
+    <div class="row"></div>
 
-<div class="ui container" id="main-container">
-  <div class="ui stackable three column center aligned grid container">
-  <div class="row">
-      <div class="ui three column wide">
-          <div class="ui inverted yellow segment">
-              <h1 class="ui header">
-                  Welcome to Project Lumos!
-              </h1>
+
+      <div class="row">
+          <div class="ui four wide column">
+              <a href="technical/">
+              <div class="ui massive red inverted button">
+              Technical Skills
+              </div>
+              </a>
+          </div>
+          <div class="ui three wide column">
+              <a href="soft-skills/">
+              <div class="ui massive blue inverted button">
+              Soft Skills
+              </div>
+              </a>
           </div>
       </div>
-  </div>
-  <div class="row"></div>
-  <div class="row"></div>
-
-
-    <div class="row">
-        <div class="ui four wide column">
-            <a href="technical/">
-            <div class="ui massive red inverted button">
-            Technical Skills
-            </div>
-            </a>
-        </div>
-        <div class="ui three wide column">
-            <a href="soft-skills/">
-            <div class="ui massive blue inverted button">
-            Soft Skills
-            </div>
-            </a>
-        </div>
+      <div class="row"></div>
+      <div class="row"></div>
+      <div class="row">
+          <div class="ui three wide column">
+              <div class="ui inverted green segment">Please pick a track!</div>
+          </div>
+      </div>
+      </div>
     </div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row">
-        <div class="ui three wide column">
-            <div class="ui inverted green segment">Please pick a track!</div>
-        </div>
-    </div>
-    </div>
-  </div>
-
-</div>
-
-<footer>
-    <div class="ui center aligned container">
-<div class="ui inverted vertical footer segment">
-    <p id='love'>Made with <i class="heart icon"></i>for DMCE</p>
-    <div class="ui inverted section divider"></div>
-    <div class="ui horizontal inverted small divided link list">
-        <a href="#" id="disclaimer" class="item" style="color: inherit;">Disclaimer</a>
-        <a class="item" id="feedback" class="item" style="color: inherit;">Feedback</a>
+  <!-- disclaimer modal -->
+  <div class="ui small modal" id="disclaimer-modal">
+    <div class="header">Disclaimer</div>
+    <div class="content">
+      <div class="ui segment">
+          <p>
+          We are a group of ex - engineering students, and currently busy being management students/working professionals. This project/resource/site has been created with the sole intent of spreading knowledge and promoting self-development. 
+          </p>
+          <p>
+          We do not own nor are we commercially promoting any of the content that you can access through this site. We are not experts in education, so we are not responsible nor liable for any issues you have with the content.
+          </p>
+          <p>
+          This project/resource/site is entirely non-profit and has no commercial interest whatsoever.
+          <p>
+          We hope you have a pleasant learning experience. Lots of love and light!<br/>
+          <br/>
+          ~ <b> Team Lumos </b> 
+          </p>
       </div>
     </div>
   </div>
-</footer>
+  <!-- disclaimer modal -->
 
-<!-- disclaimer modal -->
-<div class="ui small modal" id="disclaimer-modal">
-  <div class="header">Disclaimer</div>
-  <div class="content">
-    <div class="ui segment">
-        <p>
-        We are a group of ex - engineering students, and currently busy being management students/working professionals. This project/resource/site has been created with the sole intent of spreading knowledge and promoting self-development. 
-        </p>
-        <p>
-        We do not own nor are we commercially promoting any of the content that you can access through this site. We are not experts in education, so we are not responsible nor liable for any issues you have with the content.
-        </p>
-        <p>
-        This project/resource/site is entirely non-profit and has no commercial interest whatsoever.
-        <p>
-        We hope you have a pleasant learning experience. Lots of love and light!<br/>
-        <br/>
-        ~ <b> Team Lumos </b> 
-        </p>
+  <!-- feedback form modal -->
+  <div class="ui inverted small modal" id="feedback-modal">
+    <div class="header"><h2 class="ui teal header center aligned">
+          You are awesome! ^__^
+      </h2></div>
+      <div class="content">
+        <div class="ui container">
+            <div class="column">
+                <div class="ui form" id="form">
+                    <div class="ui fluid segment">
+                        <div class="field">
+                            <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input id="username" type="text" name="username" placeholder="Name">
+                            </div>
+                        </div>
 
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="mail icon"></i>
+                                <input id="email" class="feedback-data" type="text" name="email" placeholder="E-mail address*">
+                            </div>
+                        </div>
+                        <div class="field">
+                        <i class="write icon"></i>
+                            <div class="ui left icon input">
+                                <textarea id="feedback" placeholder="Type in your feedback*" class="feedback-data"></textarea>
+                            </div>
+                        </div><!-- textarea -->
+                       
+                       <div class="ui fluid large teal submit button" id="submit">Submit feedback!</div>
+                        </div>
+                    </div>
+            </div>
+        </div><!-- container -->
+      </div><!-- content -->
+  </div><!-- modal -->
+  <!-- feedback form modal  -->
+
+  <div class="push"></div>
+
+</div><!-- wrapper -->
+
+<div class="footer">
+    <div class="ui center aligned container">
+      <div class="ui inverted vertical footer segment">
+        <p id='love'>Made with <i class="heart icon"></i>for DMCE</p>
+          <div class="ui inverted section divider"></div>
+          <div class="ui horizontal inverted small divided link list">
+           <a href="#" id="disclaimer" class="item" style="color: inherit;">Disclaimer</a>
+           <a id="feedback" class="item" style="color: inherit;">Feedback</a>
+          </div>
+      </div>
     </div>
 </div>
-</div>
-<!-- disclaimer modal -->
-
-<!-- feedback form modal -->
-<div class="ui inverted small modal" id="feedback-modal">
-  <div class="header"><h2 class="ui teal header center aligned">
-        You are awesome! ^__^
-    </h2></div>
-    <div class="content">
-    <div class="ui container">
-        <div class="column">
-            <div class="ui form" id="form">
-                <div class="ui fluid segment">
-                    <div class="field">
-                        <div class="ui left icon input">
-                        <i class="user icon"></i>
-                        <input id="username" type="text" name="username" placeholder="Name">
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <div class="ui left icon input">
-                            <i class="mail icon"></i>
-                            <input id="email" class="feedback-data" type="text" name="email" placeholder="E-mail address*">
-                        </div>
-                    </div>
-                    <div class="field">
-                    <i class="write icon"></i>
-                        <div class="ui left icon input">
-                            <textarea id="feedback" placeholder="Type in your feedback*" class="feedback-data"></textarea>
-                        </div>
-                    </div><!-- textarea -->
-                   
-                   <div class="ui fluid large teal submit button" id="submit">Submit feedback!</div>
-                    </div>
-                </div>
-        </div>
-    </div><!-- container -->
-    </div><!-- content -->
-</div><!-- modal -->
-<!-- feedback form modal  -->
 </body>
 </html>

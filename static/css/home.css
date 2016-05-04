@@ -1,14 +1,30 @@
-  .ui.footer.segment {
-    /*margin: 5em 0em 0em;*/
-    text-align: center;
-    bottom: 0;
-    position: absolute;
-    width: 100%;
-    height: 100;
-    /*padding: 5em 0em;*/
-}
 body{
     background : #000000 url('../images/type.png');
     /*background-size: 100% 100%;*/
-    height:auto!;
 }
+
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+.wrapper {
+    min-height: 100%;
+    height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
+    height: 100%;
+    margin: 0 auto -155px; /* the bottom margin is the negative value of the footer's height */
+}
+.footer, .push {
+    height: 155px; /* .push must be the same height as .footer */
+}
+
+.footer{
+        text-align: center;
+}
+/*
+
+Sticky Footer by Ryan Fait
+http://ryanfait.com/
+
+*/
