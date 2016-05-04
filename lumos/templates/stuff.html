@@ -64,7 +64,19 @@
         data-desc="{{ stuff.desc }}" data-link="{{ stuff.link }}" >
           <div class="ui inverted orange segment stuff" data-id="{{ stuff.id }}">
           <p>
-          <h3>{{ stuff.title }}</h3>
+          <h3>{{ stuff.title }}
+            <p style="float:right; text-align:right;">                          
+              {% if row.media_type == 0%}
+                <i class="youtube play icon"></i>
+              {% elif row.media_type == 1 %}
+                <i class="book icon"></i>
+              {% elif row.media_type == 2 %}
+                <i class="browser icon"></i>
+              {% else%}
+                <i class="idea icon"></i>
+              {% endif %}
+            </p>
+          </h3>
           <p id="stuff_{{ stuff.id }}" style="display:none;">
           {{ stuff.desc }}</p>              
           </p>

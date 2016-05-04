@@ -126,7 +126,7 @@ def stuff_to_know(request):
         curr_stuff['title'] = stuff.title
         curr_stuff['link'] = stuff.link
         curr_stuff['desc'] = stuff.desc
-
+        curr_stuff['media_type'] = stuff.media_type
         return_data.append(curr_stuff)
     return render(request, 'stuff.html', {'return_data' : return_data})
 
