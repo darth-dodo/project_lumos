@@ -144,3 +144,6 @@ def csv_gen_view(request, location_slug):
         return response
     else:
         return HttpResponse(False)
+
+def page_not_found(request):
+    return render(request,'page_not_found.html')
