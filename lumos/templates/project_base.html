@@ -64,11 +64,23 @@
         data-desc="{{ project.desc }}" data-link="{{ project.link }}" >
           <div class="ui segment project diff_lvl_{{ project.difficulty }}" data-id="{{ project.id }}">
           <p>
-          <h3>{{ project.title }}</h3>
+              <h4 style="float:center; text-align:center;">                          
+              {% if project.media_type == 0%}
+                <i class="youtube play icon"></i>
+              {% elif project.media_type == 1 %}
+                <i class="book icon"></i>
+              {% elif project.media_type == 2 %}
+                <i class="browser icon"></i>
+              {% else%}
+                <i class="idea icon"></i>
+              {% endif %}
+              </h4>
+              <h3>{{ project.title }}</h3>
+              <p>
               | {% for lang in project.all_langs %}
                   {{ lang }} | 
               {% endfor %}
-          
+            </p>
           <p id="project_id_{{ project.id }}" style="display:none;">
           <br/>{{ project.desc }}</p>              
           </p>

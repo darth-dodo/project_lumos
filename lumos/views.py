@@ -101,7 +101,8 @@ def project_base(request):
         curr_proj['desc'] = project.desc
         curr_proj['difficulty'] = project.difficulty
         curr_proj['all_langs'] = [lang.name for lang in project.prog_lang.all()]
-
+        curr_proj['media_type'] = project.media_type
+        
         return_data.append(curr_proj)
     return render(request, 'project_base.html', {'return_data' : return_data})
 
