@@ -6,7 +6,6 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
   <title>{{display_data.name}}</title>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
@@ -81,9 +80,19 @@
                     <a {% if row.link %} href="{{row.link}}" target="_blank" {% else %} href="#" {%endif%}style="color:inherit;">
                     <h3 class="ui header" style="color:inherit;">
                         {{ row.title }}
+                        <p style="float:right; text-align:right;">                          
+                          {% if row.media_type == 0%}
+                            <i class="youtube play icon"></i>
+                          {% elif row.media_type == 1 %}
+                            <i class="book icon"></i>
+                          {% elif row.media_type == 2 %}
+                            <i class="browser icon"></i>
+                          {% else%}
+                            <i class="idea icon"></i>
+                          {% endif %}
+                        </p>
                     </h3>
-                        {% if row.data_desc %}
-                          
+                        {% if row.data_desc %}                          
                           <p>{{ row.data_desc }}</p>
                         {% endif %}
                 </a>
