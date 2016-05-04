@@ -20,3 +20,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('lumos.urls')),
 ]
+
+handler404 = 'lumos.views.page_not_found'
+handler500 = 'lumos.views.page_not_found'
+handler400 = 'lumos.views.page_not_found'
