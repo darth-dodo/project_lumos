@@ -66,11 +66,11 @@
           <p>
           <h3>{{ stuff.title }}
             <p style="float:right; text-align:right;">                          
-              {% if row.media_type == 0%}
+              {% if stuff.media_type == 0%}
                 <i class="youtube play icon"></i>
-              {% elif row.media_type == 1 %}
+              {% elif stuff.media_type == 1 %}
                 <i class="book icon"></i>
-              {% elif row.media_type == 2 %}
+              {% elif stuff.media_type == 2 %}
                 <i class="browser icon"></i>
               {% else%}
                 <i class="idea icon"></i>
