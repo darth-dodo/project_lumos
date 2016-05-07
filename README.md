@@ -8,6 +8,8 @@ The site's primary objective was to list out the knowledge resources for the stu
 * The site was built using [Django](https://github.com/django/django) and [Semantic UI](https://github.com/Semantic-Org/Semantic-UI)
 * It is hosted on a free tier at [PythonAnywhere](https://www.pythonanywhere.com/)
 
+##### The site is located at [projectlumos.pythonnywhere.com](projectlumos.pythonnywhere.com)
+
 ### Authors and Contributors
 The site was conceptualized and the resources were aggregated between Dec. 2015 - Jan. 2016, by [Prashant Khisty](https://www.facebook.com/pvkhisty?fref=ts), [Ashwin Iyer](https://www.facebook.com/shwnyr?fref=ts), [Aditi Singh] (https://www.facebook.com/aditi.singh.9615?fref=ts), [Pritam Bhangale](https://www.facebook.com/pritam.bhangale?fref=ts) and [Abhishek Juneja] (@darth-dodo). 
 The website was coded by [Abhishek Juneja] (@darth-dodo) in Jan. 2016.
